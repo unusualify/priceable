@@ -1,0 +1,46 @@
+{
+    "name": "unusualify/priceable",
+    "description": "The price feature addible to the any system",
+    "keywords": ["unusualify", "priceable"],
+    "homepage": "https://github.com/unusualify/",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Oğuzhan Bükçüoğlu",
+            "email": "oguzhan@unusualgrowth.com"
+        }
+    ],
+    "support": {
+        "email": "stef@marshmallow.dev"
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^8.0|^8.1",
+        "marshmallow/sluggable": "^1.0",
+        "moneyphp/money": "^v4.0.3"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://nova.laravel.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Unusualify\\Priceable\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Unusualify\\Priceable\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Unusualify\\Priceable\\LaravelServiceProvider"
+            ]
+        }
+    }
+}
