@@ -16,6 +16,9 @@ class CreatePricesTable extends Migration
         Schema::create('prices', function (Blueprint $table) {
             $table->id();
             $table->morphs('priceable');
+
+            $table->unsignedBigInteger('price_type_id')->default(null)->nullable();
+
             $table->unsignedBigInteger('vatrate_id');
             $table->unsignedBigInteger('currency_id');
             $table->bigInteger('display_price')->default(0);
@@ -29,6 +32,7 @@ class CreatePricesTable extends Migration
 
             $table->foreign('vatrate_id')->references('id')->on('vat_rates');
             $table->foreign('currency_id')->references('id')->on('currencies');
+            $table->foreign('price_type_id')->references('id')->on('price_types');
         });
     }
 

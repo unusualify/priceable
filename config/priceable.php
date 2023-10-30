@@ -9,17 +9,17 @@ return [
     'currency_locale' => env('CURRENCY_LOCALE', env('CASHIER_CURRENCY_LOCALE', 'nl')),
 
     'models' => [
-        'vat' => \Marshmallow\Priceable\Models\VatRate::class,
-        'price' => \Marshmallow\Priceable\Models\Price::class,
-        'currency' => \Marshmallow\Priceable\Models\Currency::class,
-        'price_type' => \Marshmallow\Priceable\Models\PriceType::class,
+        'vat' => \Unusualify\Priceable\Models\VatRate::class,
+        'price' => \Unusualify\Priceable\Models\Price::class,
+        'currency' => \Unusualify\Priceable\Models\Currency::class,
+        'price_type' => \Unusualify\Priceable\Models\PriceType::class,
     ],
 
     'resources' => [
-        'vat' => \Marshmallow\Priceable\Nova\VatRate::class,
-        'price' => \Marshmallow\Priceable\Nova\Price::class,
-        'currency' => \Marshmallow\Priceable\Nova\Currency::class,
-        'price_type' => \Marshmallow\Priceable\Nova\PriceType::class,
+        'vat' => \Unusualify\Priceable\Nova\VatRate::class,
+        'price' => \Unusualify\Priceable\Nova\Price::class,
+        'currency' => \Unusualify\Priceable\Nova\Currency::class,
+        'price_type' => \Unusualify\Priceable\Nova\PriceType::class,
     ],
 
     /**
@@ -54,6 +54,6 @@ return [
     'public_excluding_vat' => env('PRICEABLE_PUBLIC_EXCLUDING_VAT', false),
 
     'observers' => [
-        'price' => \Marshmallow\Priceable\Observers\PriceableObserver::class,
+        'price' => \Unusualify\Priceable\Observers\PriceableObserver::class,
     ],
 ];

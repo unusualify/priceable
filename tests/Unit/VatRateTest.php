@@ -3,8 +3,8 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
-use Marshmallow\Priceable\Facades\Price;
-use Marshmallow\Priceable\Models\VatRate;
+use Unusualify\Priceable\Facades\Price;
+use Unusualify\Priceable\Models\VatRate;
 
 class VatRateTest extends TestCase
 {

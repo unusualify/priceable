@@ -1,9 +1,9 @@
 <?php
 
-namespace Marshmallow\Priceable\Seeders;
+namespace Unusualify\Priceable\Seeders;
 
 use Illuminate\Database\Seeder;
-use Marshmallow\Priceable\Models\VatRate;
+use Unusualify\Priceable\Models\VatRate;
 
 /**
  * php artisan db:seed --class=Marshmallow\\Priceable\\Seeders\\VatRatesSeeder
@@ -12,9 +12,9 @@ use Marshmallow\Priceable\Models\VatRate;
 class VatRatesSeeder extends Seeder
 {
     protected $default_vat_rates = [
-        ['Geen', 0],
-        ['Laag', 9],
-        ['Hoog', 21],
+        ['Zero', 0], //['Geen', 0],
+        ['Low', 10], //['Laag', 9],
+        ['High', 20], // ['Hoog', 21],
     ];
 
     /**

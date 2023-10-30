@@ -1,6 +1,6 @@
 <?php
 
-namespace Marshmallow\Priceable\Nova\Fields;
+namespace Unusualify\Priceable\Nova\Fields;
 
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Number;

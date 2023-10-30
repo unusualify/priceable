@@ -1,21 +1,18 @@
 <?php
 
-namespace Marshmallow\Priceable\Models;
+namespace Unusualify\Priceable\Models;
 
 use Illuminate\Support\Str;
-use App\Observers\PriceableObserver;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Marshmallow\HelperFunctions\Traits\Observer;
-use Marshmallow\HelperFunctions\Traits\ModelHasDefaults;
 use Marshmallow\HelperFunctions\Facades\Builder as BuilderFacade;
+use Unusualify\Priceable\Observers\PriceableObserver;
 
 class Price extends Model
 {
-    use Observer;
     use SoftDeletes;
-    use ModelHasDefaults;
 
     protected $guarded = [];
 
@@ -25,6 +22,24 @@ class Price extends Model
     ];
 
     /**
+     * Addind default attributes on __construct level is
+     * needed for Nova so it pre-filles the form fields
+     * when creating a new resource record.
+     * @param array $params [description]
+     */
+    public function __construct($params = [])
+    {
+        $default_attributes = $this->defaultAttributes();
+        foreach ($default_attributes as $column => $default_value) {
+            if (! isset($params[$column])) {
+                $params[$column] = $default_value;
+            }
+        }
+
+        parent::__construct($params);
+    }
+
+    /**
      * The "booting" method of the model.
      *
      * @return void
@@ -32,17 +47,60 @@ class Price extends Model
     protected static function boot()
     {
         parent::boot();
+
         self::observe(self::getObserver());
     }
 
+    public static function bootObserver(): void
+    {
+        \Unusualify\Observers\ModelObserver::observe(
+            get_class()
+        );
+    }
+    public static function getObserver(): string
+    {
+        return config('priceable.observers.price', PriceableObserver::class);
+    }
+    /**
+     * This is called when your are saving a model resource.
+     * @return [type] [description]
+     */
+    public function applyDefaultAttributes()
+    {
+        $default_attributes = $this->defaultAttributes();
+        foreach ($default_attributes as $column => $default_value) {
+            if (! $this->$column) {
+                $this->$column = $default_value;
+            }
+        }
+    }
+    /**
+     * For a price we need to make sure we always have
+     * a VAT rate and a Currency. Selecting them everytime
+     * in Nova is a hassle, therefor we set some default
+     * that come from the config.
+     * @return array Array with default attributes
+     */
+    public function defaultAttributes(): array
+    {
+        return [
+            'vatrate_id' => config('priceable.nova.defaults.vat_rates'),
+            'currency_id' => config('priceable.nova.defaults.currencies'),
+            'price_type_id' => config('priceable.nova.defaults.price_type'),
+        ];
+    }
+
+
+
+
     protected function formatAmount($amount, $currency = null)
     {
-        return \Marshmallow\Priceable\Facades\Price::formatAmount($amount, $currency);
+        return \Unusualify\Priceable\Facades\Price::formatAmount($amount, $currency);
     }
 
     protected function amount($amount, $currency = null)
     {
-        return \Marshmallow\Priceable\Facades\Price::amount($amount, $currency);
+        return \Unusualify\Priceable\Facades\Price::amount($amount, $currency);
     }
 
     /**
@@ -117,13 +175,13 @@ class Price extends Model
         return $this->amount($this->vat_amount);
     }
 
-    /**
-     * Scopes
-     */
-    public function scopeCurrentlyActive(Builder $builder)
-    {
-        BuilderFacade::published($builder);
-    }
+    // /**
+    //  * Scopes
+    //  */
+    // public function scopeCurrentlyActive(Builder $builder)
+    // {
+    //     BuilderFacade::published($builder);
+    // }
 
     /**
      * Relationships
@@ -133,7 +191,7 @@ class Price extends Model
         return $this->belongsTo(config('priceable.models.price_type'), 'price_type_id');
     }
 
-    public function vatrate()
+    public function vatRate()
     {
         return $this->belongsTo(config('priceable.models.vat'));
     }
@@ -146,26 +204,5 @@ class Price extends Model
     public function priceable()
     {
         return $this->morphTo();
-    }
-
-    /**
-     * For a price we need to make sure we always have
-     * a VAT rate and a Currency. Selecting them everytime
-     * in Nova is a hassle, therefor we set some default
-     * that come from the config.
-     * @return array Array with default attributes
-     */
-    public function defaultAttributes(): array
-    {
-        return [
-            'vatrate_id' => config('priceable.nova.defaults.vat_rates'),
-            'currency_id' => config('priceable.nova.defaults.currencies'),
-            'price_type_id' => config('priceable.nova.defaults.price_type'),
-        ];
-    }
-
-    public static function getObserver(): string
-    {
-        return config('priceable.observers.price', PriceableObserver::class);
     }
 }

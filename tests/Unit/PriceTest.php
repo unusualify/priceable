@@ -6,9 +6,9 @@ use Carbon\Carbon;
 use Tests\TestCase;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Artisan;
-use Marshmallow\Priceable\Models\Price;
-use Marshmallow\Priceable\Models\VatRate;
-use Marshmallow\Priceable\Models\Currency;
+use Unusualify\Priceable\Models\Price;
+use Unusualify\Priceable\Models\VatRate;
+use Unusualify\Priceable\Models\Currency;
 
 class PriceTest extends TestCase
 {

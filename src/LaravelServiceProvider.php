@@ -1,11 +1,11 @@
 <?php
 
-namespace Marshmallow\Priceable;
+namespace Unusualify\Priceable;
 
 use Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\ServiceProvider;
-use Marshmallow\Priceable\Models\Currency;
+use Unusualify\Priceable\Models\Currency;
 
 class PriceableServiceProvider extends ServiceProvider
 {

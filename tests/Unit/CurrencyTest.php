@@ -3,8 +3,8 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
-use Marshmallow\Priceable\Facades\Price;
-use Marshmallow\Priceable\Models\Currency;
+use Unusualify\Priceable\Facades\Price;
+use Unusualify\Priceable\Models\Currency;
 
 class CurrencyTest extends TestCase
 {

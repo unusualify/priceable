@@ -15,7 +15,7 @@ composer require marshmallow/priceable
 ...
 
 ```bash
-php artisan vendor:publish --provider="Marshmallow\Priceable\PriceableServiceProvider" --tag="config" --force
+php artisan vendor:publish --provider="Unusualify\Priceable\LaravelServiceProvider" --tag="config" --force
 ```
 
 ### Methods
@@ -28,7 +28,7 @@ Currency::getExceptUserCurrent()
 ### Routes
 
 ```php
-@foreach (\Marshmallow\Priceable\Models\Currency::get() as $currency)
+@foreach (\Unusualify\Priceable\Models\Currency::get() as $currency)
     <a href="{{ route('set-currency', $currency) }}">
         {{ $currency->name }}
     </a>

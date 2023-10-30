@@ -3,7 +3,7 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
-use Marshmallow\Priceable\Facades\Price;
+use Unusualify\Priceable\Facades\Price;
 
 class PriceableTest extends TestCase
 {

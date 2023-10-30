@@ -1,6 +1,6 @@
 <?php
 
-namespace Marshmallow\Priceable\Nova\Helpers;
+namespace Unusualify\Priceable\Nova\Helpers;
 
 class FieldNameHelper
 {

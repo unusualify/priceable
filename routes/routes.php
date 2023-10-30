@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Marshmallow\Priceable\Http\Controllers\SetCurrencyController;
+use Unusualify\Priceable\Http\Controllers\SetCurrencyController;
 
 Route::middleware(['web'])
     ->get(

@@ -1,11 +1,11 @@
 <?php
 
-namespace Marshmallow\Priceable\Facades;
+namespace Unusualify\Priceable\Facades;
 
 class Price extends \Illuminate\Support\Facades\Facade
 {
     protected static function getFacadeAccessor()
     {
-        return \Marshmallow\Priceable\Price::class;
+        return \Unusualify\Priceable\Price::class;
     }
 }

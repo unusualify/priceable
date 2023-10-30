@@ -1,9 +1,9 @@
 <?php
 
-namespace Marshmallow\Priceable\Seeders;
+namespace Unusualify\Priceable\Seeders;
 
 use Illuminate\Database\Seeder;
-use Marshmallow\Priceable\Models\Currency;
+use Unusualify\Priceable\Models\Currency;
 
 /**
  * php artisan db:seed --class=Marshmallow\\Priceable\\Seeders\\CurrencySeeder
@@ -12,6 +12,8 @@ use Marshmallow\Priceable\Models\Currency;
 class CurrencySeeder extends Seeder
 {
     protected $default_currencies = [
+        'Turkish Lira' => 'TRY',
+        'Dollar' => 'USD',
         'Euro' => 'EUR',
     ];
 

@@ -2,11 +2,11 @@
 
 namespace App\Nova;
 
-use Marshmallow\Priceable\Nova\{{ resource_name }} as Nova{{ resource_name }}Module;
+use Unusualify\Priceable\Nova\{{ resource_name }} as Nova{{ resource_name }}Module;
 
 class {{ resource_name }} extends Nova{{ resource_name }}Module
 {
-    // public static $model = 'Marshmallow\Priceable\Models\{{ resource_name }}';
+    // public static $model = 'Unusualify\Priceable\Models\{{ resource_name }}';
     // public static $title = 'name';
     // public static $search = ['name'];
 

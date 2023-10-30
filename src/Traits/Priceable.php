@@ -1,13 +1,13 @@
 <?php
 
-namespace Marshmallow\Priceable\Traits;
+namespace Unusualify\Priceable\Traits;
 
 use Illuminate\Support\Facades\Config;
-use Marshmallow\Priceable\Models\Price;
-use Marshmallow\Priceable\Models\PriceType;
+use Unusualify\Priceable\Models\Price;
+use Unusualify\Priceable\Models\PriceType;
 use Illuminate\Database\Eloquent\Collection;
-use Marshmallow\Priceable\Facades\Price as PriceFacade;
-use Marshmallow\Priceable\Facades\Price as PriceHelper;
+use Unusualify\Priceable\Facades\Price as PriceFacade;
+use Unusualify\Priceable\Facades\Price as PriceHelper;
 
 trait Priceable
 {

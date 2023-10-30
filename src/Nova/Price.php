@@ -1,6 +1,6 @@
 <?php
 
-namespace Marshmallow\Priceable\Nova;
+namespace Unusualify\Priceable\Nova;
 
 use App\Nova\Resource;
 use Illuminate\Http\Request;
@@ -9,10 +9,10 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\BelongsTo;
-use Marshmallow\Priceable\Nova\VatRate;
-use Marshmallow\Priceable\Nova\PriceType;
-use Marshmallow\Priceable\Nova\Helpers\FieldNameHelper;
-use Marshmallow\Priceable\Nova\Currency as CurrencyResource;
+use Unusualify\Priceable\Nova\VatRate;
+use Unusualify\Priceable\Nova\PriceType;
+use Unusualify\Priceable\Nova\Helpers\FieldNameHelper;
+use Unusualify\Priceable\Nova\Currency as CurrencyResource;
 
 class Price extends Resource
 {
@@ -21,7 +21,7 @@ class Price extends Resource
      *
      * @var string
      */
-    public static $model = 'Marshmallow\Priceable\Models\Price';
+    public static $model = 'Unusualify\Priceable\Models\Price';
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -59,9 +59,9 @@ class Price extends Resource
             BelongsTo::make(__('Vat rate'), 'vatrate', config('priceable.resources.vat'))->withoutTrashed(),
             BelongsTo::make(__('Currency'), 'currency', config('priceable.resources.currency'))->withoutTrashed(),
             Currency::make(FieldNameHelper::priceLabel(), 'display_price')->displayUsing(function ($value) {
-                return \Marshmallow\Priceable\Facades\Price::formatAmount($value);
+                return \Unusualify\Priceable\Facades\Price::formatAmount($value);
             })->resolveUsing(function ($value) {
-                return \Marshmallow\Priceable\Facades\Price::amount($value);
+                return \Unusualify\Priceable\Facades\Price::amount($value);
             }),
             DateTime::make(__('Valid from'), 'valid_from'),
             DateTime::make(__('Valid till'), 'valid_till'),

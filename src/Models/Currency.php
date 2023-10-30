@@ -1,6 +1,6 @@
 <?php
 
-namespace Marshmallow\Priceable\Models;
+namespace Unusualify\Priceable\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;

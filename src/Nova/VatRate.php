@@ -1,6 +1,6 @@
 <?php
 
-namespace Marshmallow\Priceable\Nova;
+namespace Unusualify\Priceable\Nova;
 
 use App\Nova\Resource;
 use Illuminate\Http\Request;
@@ -15,7 +15,7 @@ class VatRate extends Resource
      *
      * @var string
      */
-    public static $model = 'Marshmallow\Priceable\Models\VatRate';
+    public static $model = 'Unusualify\Priceable\Models\VatRate';
 
     /**
      * The single value that should be used to represent the resource when being displayed.

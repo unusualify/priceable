@@ -1,14 +1,14 @@
 <?php
 
-namespace Marshmallow\Priceable;
+namespace Unusualify\Priceable;
 
 use Money\Money;
 use Money\Currency;
 use NumberFormatter;
 use Money\Currencies\ISOCurrencies;
 use Money\Formatter\IntlMoneyFormatter;
-use Marshmallow\Priceable\Models\VatRate;
-use Marshmallow\Priceable\Models\Currency as PriceableCurrency;
+use Unusualify\Priceable\Models\VatRate;
+use Unusualify\Priceable\Models\Currency as CurrencyModel;
 
 class Price
 {
@@ -24,7 +24,7 @@ class Price
 
     public $vat_amount;
 
-    public function make(VatRate $vatrate, PriceableCurrency $currency, int $display_amount, bool $display_is_including_vat)
+    public function make(VatRate $vatrate, CurrencyModel $currency, int $display_amount, bool $display_is_including_vat)
     {
         $this->vatrate = $vatrate;
         $this->currency = $currency;

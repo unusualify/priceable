@@ -1,10 +1,10 @@
 <?php
 
-namespace Marshmallow\Priceable\Http\Controllers;
+namespace Unusualify\Priceable\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Marshmallow\Priceable\Models\Currency;
+use Unusualify\Priceable\Models\Currency;
 
 class SetCurrencyController extends Controller
 {

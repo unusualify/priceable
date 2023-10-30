@@ -1,10 +1,10 @@
 <?php
 
 use Faker\Generator as Faker;
-use Marshmallow\Priceable\Models\Price;
+use Unusualify\Priceable\Models\Price;
 
 /**
- * factory(Marshmallow\Priceable\Models\Price::class, 10)->create();
+ * factory(Unusualify\Priceable\Models\Price::class, 10)->create();
  */
 $factory->define(Price::class, function (Faker $faker) {
 	return [

@@ -1,6 +1,6 @@
 <?php
 
-namespace Marshmallow\Priceable\Nova;
+namespace Unusualify\Priceable\Nova;
 
 use App\Nova\Resource;
 use Illuminate\Http\Request;
@@ -14,7 +14,7 @@ class Currency extends Resource
      *
      * @var string
      */
-    public static $model = 'Marshmallow\Priceable\Models\Currency';
+    public static $model = 'Unusualify\Priceable\Models\Currency';
 
     /**
      * The single value that should be used to represent the resource when being displayed.
