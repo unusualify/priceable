@@ -52,7 +52,7 @@ trait Priceable
     {
         $prices = $this->availablePrices()->get();
         if ($prices->count() > 1) {
-            $price = $this->desideWhichPriceToUse($prices);
+            $price = $this->decideWhichPriceToUse($prices);
         } else {
             $price = $prices->first();
         }
@@ -74,8 +74,8 @@ trait Priceable
     public function isDiscounted()
     {
         if ($prices = $this->hasMultiplePrices()) {
-            $highest = $this->desideWhichPriceToUse($prices, 'highest');
-            $lowest = $this->desideWhichPriceToUse($prices, 'lowest');
+            $highest = $this->decideWhichPriceToUse($prices, 'highest');
+            $lowest = $this->decideWhichPriceToUse($prices, 'lowest');
 
             if ($highest->price() != $lowest->price()) {
                 return true;
@@ -88,7 +88,7 @@ trait Priceable
     public function getHighestPrice()
     {
         if ($prices = $this->hasMultiplePrices()) {
-            return $this->desideWhichPriceToUse($prices, 'highest');
+            return $this->decideWhichPriceToUse($prices, 'highest');
         }
 
         return $this->price();
@@ -109,7 +109,7 @@ trait Priceable
         return $prices;
     }
 
-    protected function desideWhichPriceToUse(Collection $prices, $action = '')
+    protected function decideWhichPriceToUse(Collection $prices, $action = '')
     {
         $action = ($action) ?: config('priceable.on_multiple_prices');
 
@@ -173,7 +173,7 @@ trait Priceable
 
     protected function getDefaultPriceType()
     {
-        return config('priceable.models.price_type')::find(config('priceable.detault_price_type'));
+        return config('priceable.models.price_type')::find(config('priceable.defaults.price_type'));
     }
 
     /**

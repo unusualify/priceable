@@ -6,7 +6,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Unusualify\Priceable\Models\PriceType;
 use Illuminate\Database\Migrations\Migration;
 
-class AddPriceTypeColumn extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -33,4 +33,4 @@ class AddPriceTypeColumn extends Migration
     {
         Schema::dropIfExists('price_types');
     }
-}
+};

@@ -8,7 +8,7 @@ class PriceableObserver
 {
     public function saving(Price $price)
     {
-        if (config('priceable.nova.prices_are_including_vat')) {
+        if (config('priceable.prices_are_including_vat')) {
 
             /**
              * The added price is including the VAT. We need to calculate

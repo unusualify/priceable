@@ -79,7 +79,7 @@ class PriceTest extends TestCase
 
     public function testItCalculatesPriceExcludingVatCorrectlyFromIncludingVatSetting()
     {
-        Config::set('priceable.nova.prices_are_including_vat', true);
+        Config::set('priceable.prices_are_including_vat', true);
         $price = $this->createPrice();
 
         $this->assertEquals($price->excludingVat(), 82.64);
@@ -87,7 +87,7 @@ class PriceTest extends TestCase
 
     public function testItCalculatesPriceIncludingVatCorrectlyFromIncludingVatSetting()
     {
-        Config::set('priceable.nova.prices_are_including_vat', true);
+        Config::set('priceable.prices_are_including_vat', true);
         $price = $this->createPrice();
 
         $this->assertEquals($price->includingVat(), 100);
@@ -95,7 +95,7 @@ class PriceTest extends TestCase
 
     public function testItCalculatesVatCorrectlyFromIncludingVatSetting()
     {
-        Config::set('priceable.nova.prices_are_including_vat', true);
+        Config::set('priceable.prices_are_including_vat', true);
         $price = $this->createPrice();
 
         $this->assertEquals($price->vat(), 17.36);
@@ -103,7 +103,7 @@ class PriceTest extends TestCase
 
     public function testItCalculatesPriceExcludingVatCorrectlyFromExcludingVatSetting()
     {
-        Config::set('priceable.nova.prices_are_including_vat', false);
+        Config::set('priceable.prices_are_including_vat', false);
         $price = $this->createPrice();
 
         $this->assertEquals($price->excludingVat(), 100);
@@ -111,7 +111,7 @@ class PriceTest extends TestCase
 
     public function testItCalculatesPriceIncludingVatCorrectlyFromExcludingVatSetting()
     {
-        Config::set('priceable.nova.prices_are_including_vat', false);
+        Config::set('priceable.prices_are_including_vat', false);
         $price = $this->createPrice();
 
         $this->assertEquals($price->includingVat(), 121);
@@ -119,7 +119,7 @@ class PriceTest extends TestCase
 
     public function testItCalculatesVatCorrectlyFromExcludingVatSetting()
     {
-        Config::set('priceable.nova.prices_are_including_vat', false);
+        Config::set('priceable.prices_are_including_vat', false);
         $price = $this->createPrice();
 
         $this->assertEquals($price->vat(), 21);
@@ -127,14 +127,14 @@ class PriceTest extends TestCase
 
     public function testItCanReturnAFormattedAmount()
     {
-        Config::set('priceable.nova.prices_are_including_vat', true);
+        Config::set('priceable.prices_are_including_vat', true);
         $price = $this->createPrice();
         $this->assertEquals($price->formatPrice(), '€ 100,00');
     }
 
     public function testItCanReturnAFormattedAmountExcludingVat()
     {
-        Config::set('priceable.nova.prices_are_including_vat', true);
+        Config::set('priceable.prices_are_including_vat', true);
         Config::set('priceable.public_excluding_vat', true);
         $price = $this->createPrice();
         $this->assertEquals($price->formatPrice(), '€ 82,64');
@@ -142,14 +142,14 @@ class PriceTest extends TestCase
 
     public function testItcanReturnANonFormattedAmount()
     {
-        Config::set('priceable.nova.prices_are_including_vat', true);
+        Config::set('priceable.prices_are_including_vat', true);
         $price = $this->createPrice();
         $this->assertEquals($price->price(), 100);
     }
 
     public function testItcanReturnANonFormattedAmountExcludingVat()
     {
-        Config::set('priceable.nova.prices_are_including_vat', true);
+        Config::set('priceable.prices_are_including_vat', true);
         Config::set('priceable.public_excluding_vat', true);
         $price = $this->createPrice();
         $this->assertEquals($price->price(), 82.64);
@@ -163,14 +163,14 @@ class PriceTest extends TestCase
 
     public function testItCanGetThePriceAsIncludingVatByTheConfigAttribute()
     {
-        Config::set('priceable.nova.prices_are_including_vat', false);
+        Config::set('priceable.prices_are_including_vat', false);
         $price = $this->createPrice();
         $this->assertEquals($price->price(), 121);
     }
 
     public function testItCanGetThePriceAsExcludingVatByTheConfigAttribute()
     {
-        Config::set('priceable.nova.prices_are_including_vat', true);
+        Config::set('priceable.prices_are_including_vat', true);
         $price = $this->createPrice();
         $this->assertEquals($price->price(), 100);
     }

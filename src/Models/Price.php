@@ -84,9 +84,9 @@ class Price extends Model
     public function defaultAttributes(): array
     {
         return [
-            'vatrate_id' => config('priceable.nova.defaults.vat_rates'),
-            'currency_id' => config('priceable.nova.defaults.currencies'),
-            'price_type_id' => config('priceable.nova.defaults.price_type'),
+            'vatrate_id' => config('priceable.defaults.vat_rates'),
+            'currency_id' => config('priceable.defaults.currencies'),
+            'price_type_id' => config('priceable.defaults.price_type'),
         ];
     }
 
@@ -119,20 +119,18 @@ class Price extends Model
      */
     public function formatPrice()
     {
-        if (config('priceable.public_excluding_vat')) {
-            return $this->formatAmount($this->price_excluding_vat);
-        }
-
-        return $this->formatAmount($this->price_including_vat);
+        return $this->formatAmount( $this->getPriceExcludingOrIncludingVat() );
     }
 
     public function price()
     {
-        if (config('priceable.public_excluding_vat')) {
-            return $this->amount($this->price_excluding_vat);
-        }
+        return $this->amount( $this->getPriceExcludingOrIncludingVat() );
+    }
 
-        return $this->amount($this->price_including_vat);
+    function getPriceExcludingOrIncludingVat(){
+        return config('priceable.public_excluding_vat')
+            ? $this->price_excluding_vat
+            : $this->price_including_vat;
     }
 
     public function priceAppendingCurrencyString()
