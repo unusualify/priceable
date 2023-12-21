@@ -6,10 +6,9 @@ use Illuminate\Support\Facades\Config;
 use Unusualify\Priceable\Models\Price;
 use Unusualify\Priceable\Models\PriceType;
 use Illuminate\Database\Eloquent\Collection;
-use Unusualify\Priceable\Facades\Price as PriceFacade;
-use Unusualify\Priceable\Facades\Price as PriceHelper;
+use Unusualify\Priceable\Facades\PriceService;
 
-trait Priceable
+trait HasPriceable
 {
     protected $price_type;
 
@@ -60,11 +59,11 @@ trait Priceable
         return $price;
     }
 
-    public function getPriceHelper()
+    public function getPriceService()
     {
         $price = $this->price();
-        return PriceHelper::make(
-            $this->price()->vatrate,
+        return PriceService::make(
+            $this->price()->vatRate,
             $this->price()->currency,
             $price->display_price,
             ($price->display_price === $price->price_including_vat)
@@ -154,6 +153,9 @@ trait Priceable
      */
     public function getPriceFormattedAttribute()
     {
+        if (!$this->price()) {
+            return;
+        }
         return $this->price()->formatPrice();
     }
 
@@ -203,7 +205,6 @@ trait Priceable
                 $builder = $currency_builder;
             }
         }
-
 
         return $builder->currentlyActive();
     }

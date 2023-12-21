@@ -27,4 +27,9 @@ class VatRate extends Model
             ->generateSlugsFrom('name')
             ->saveSlugsTo('slug');
     }
+
+    public function getTable()
+    {
+        return config('priceable.tables.vat_rates', parent::getTable());
+    }
 }

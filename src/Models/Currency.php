@@ -21,4 +21,10 @@ class Currency extends Model
         $current = self::getUserCurrent();
         return self::where('id', '!=', $current->id)->get();
     }
+
+    public function getTable()
+    {
+        return config('priceable.tables.currencies', parent::getTable());
+    }
+
 }

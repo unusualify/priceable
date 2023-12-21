@@ -10,23 +10,47 @@ use Money\Formatter\IntlMoneyFormatter;
 use Unusualify\Priceable\Models\VatRate;
 use Unusualify\Priceable\Models\Currency as CurrencyModel;
 
-class Price
+class PriceService
 {
-    public $vatrate;
+    /**
+     * @var \Unusualify\Priceable\Models\VatRate
+     *
+     */
+    public $vatRate;
 
+    /**
+     * @var \Unusualify\Priceable\Models\Currency
+     *
+     */
     public $currency;
 
+    /**
+     * @var int
+     *
+     */
     public $display_amount;
 
+    /**
+     * @var bool
+     *
+     */
     public $price_excluding_vat;
 
+    /**
+     * @var bool
+     *
+     */
     public $price_including_vat;
 
+    /**
+     * @var double
+     *
+     */
     public $vat_amount;
 
-    public function make(VatRate $vatrate, CurrencyModel $currency, int $display_amount, bool $display_is_including_vat)
+    public function make(VatRate $vatRate, CurrencyModel $currency, int $display_amount, bool $display_is_including_vat)
     {
-        $this->vatrate = $vatrate;
+        $this->vatRate = $vatRate;
         $this->currency = $currency;
         $this->display_amount = $display_amount;
 
@@ -36,11 +60,11 @@ class Price
              * The added price is including the VAT. We need to calculate
              * the price without the VAT.
              */
-            $price_excluding_vat = round(($display_amount / (100 + $vatrate->rate)) * 100);
+            $price_excluding_vat = round(($display_amount / (100 + $vatRate->rate)) * 100);
             $price_including_vat = $display_amount;
         } else {
             $price_excluding_vat = $display_amount;
-            $price_including_vat = round($price_excluding_vat * $vatrate->multiplier());
+            $price_including_vat = round($price_excluding_vat * $vatRate->multiplier());
         }
 
         $this->price_excluding_vat = $price_excluding_vat;

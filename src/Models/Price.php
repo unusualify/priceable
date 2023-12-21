@@ -84,14 +84,11 @@ class Price extends Model
     public function defaultAttributes(): array
     {
         return [
-            'vatrate_id' => config('priceable.defaults.vat_rates'),
+            'vat_rate_id' => config('priceable.defaults.vat_rates'),
             'currency_id' => config('priceable.defaults.currencies'),
             'price_type_id' => config('priceable.defaults.price_type'),
         ];
     }
-
-
-
 
     protected function formatAmount($amount, $currency = null)
     {
@@ -173,13 +170,42 @@ class Price extends Model
         return $this->amount($this->vat_amount);
     }
 
-    // /**
-    //  * Scopes
-    //  */
-    // public function scopeCurrentlyActive(Builder $builder)
-    // {
-    //     BuilderFacade::published($builder);
-    // }
+    /**
+     * Scopes
+     */
+    public function scopeCurrentlyActive(Builder $builder)
+    {
+        // BuilderFacade::published($builder);
+        $valid_from_column = 'valid_from';
+        $valid_till_column = 'valid_till';
+
+        $builder->where(function ($builder) use ($valid_from_column, $valid_till_column) {
+            /**
+             * If both are null, we handle this as active.
+             */
+            $builder->whereNull($valid_from_column)->whereNull($valid_till_column);
+        })->orWhere(function ($builder) use ($valid_from_column, $valid_till_column) {
+
+            /**
+             * From is null, and now() is lower than the end date.
+             */
+            $builder->whereNull($valid_from_column)->where($valid_till_column, '>=', now());
+        })->orWhere(function ($builder) use ($valid_from_column, $valid_till_column) {
+
+            /**
+             * From is is in the past and the end dat is null
+             */
+            $builder->where($valid_from_column, '<=', now())->whereNull($valid_till_column);
+        })->orWhere(function ($builder) use ($valid_from_column, $valid_till_column) {
+
+            /**
+             * From is in the past and till is in the future.
+             */
+            $builder->where($valid_from_column, '<=', now())->where($valid_till_column, '>=', now());
+        });
+
+        return $builder;
+    }
 
     /**
      * Relationships
@@ -202,5 +228,10 @@ class Price extends Model
     public function priceable()
     {
         return $this->morphTo();
+    }
+
+    public function getTable()
+    {
+        return config('priceable.tables.prices', parent::getTable());
     }
 }

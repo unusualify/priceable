@@ -5,7 +5,6 @@ return [
     'currency_locale' => env('CURRENCY_LOCALE', env('CASHIER_CURRENCY_LOCALE', 'nl')),
 
     'prices_are_including_vat' => true,
-
     'public_excluding_vat' => env('PRICEABLE_PUBLIC_EXCLUDING_VAT', false),
 
     /**
@@ -22,9 +21,16 @@ return [
         'price_type' => \Unusualify\Priceable\Models\PriceType::class,
     ],
 
+    'tables' => [
+        'vat_rates' => 'vat_rates',
+        'currencies' => 'currencies',
+        'price_types' => 'price_types',
+        'prices' => 'prices',
+    ],
+
     'defaults' => [
         'currencies' => 1,
-        'vat_rates' => 2,
+        'vat_rates' => 1,
         'price_type' => 1,
     ],
 

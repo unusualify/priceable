@@ -12,4 +12,9 @@ class PriceType extends Model
     use SoftDeletes;
 
     protected $guarded = [];
+
+    public function getTable()
+    {
+        return config('priceable.tables.price_types', parent::getTable());
+    }
 }
