@@ -8,9 +8,6 @@ class PriceableObserver
 {
     public function saving(Price $price)
     {
-        dd(
-            $price
-        );
         if (config('priceable.prices_are_including_vat')) {
 
             /**

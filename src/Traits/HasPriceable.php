@@ -211,6 +211,10 @@ trait HasPriceable
 
     public function prices(PriceType $type = null)
     {
+        // return $this->morphToMany(
+        //     config('priceable.models.price'),
+        //     'priceable'
+        // );
         return $this->morphMany(config('priceable.models.price'), 'priceable');
     }
 }

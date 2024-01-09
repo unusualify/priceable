@@ -57,10 +57,12 @@ class Price extends Model
             get_class()
         );
     }
+
     public static function getObserver(): string
     {
         return config('priceable.observers.price', PriceableObserver::class);
     }
+
     /**
      * This is called when your are saving a model resource.
      * @return [type] [description]
@@ -74,6 +76,7 @@ class Price extends Model
             }
         }
     }
+
     /**
      * For a price we need to make sure we always have
      * a VAT rate and a Currency. Selecting them everytime
@@ -92,12 +95,12 @@ class Price extends Model
 
     protected function formatAmount($amount, $currency = null)
     {
-        return \Unusualify\Priceable\Facades\Price::formatAmount($amount, $currency);
+        return \Unusualify\Priceable\Facades\PriceService::formatAmount($amount, $currency);
     }
 
     protected function amount($amount, $currency = null)
     {
-        return \Unusualify\Priceable\Facades\Price::amount($amount, $currency);
+        return \Unusualify\Priceable\Facades\PriceService::amount($amount, $currency);
     }
 
     /**
@@ -107,7 +110,7 @@ class Price extends Model
      */
     protected function setDisplayPriceAttribute(float $amount)
     {
-        $this->attributes['display_price'] = $amount * 100;
+        $this->attributes['display_price'] = $amount * 1;
     }
 
     /**
