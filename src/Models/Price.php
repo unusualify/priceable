@@ -110,7 +110,7 @@ class Price extends Model
      */
     protected function setDisplayPriceAttribute(float $amount)
     {
-        $this->attributes['display_price'] = $amount * 1;
+        $this->attributes['display_price'] = $amount * 100;
     }
 
     /**
