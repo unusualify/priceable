@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('symbol', 10)->nullable()->default(NULL);
             $table->string('iso_4217', 3)->default(null)->nullable();
+            $table->integer('iso_4217_number')->default(null)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
